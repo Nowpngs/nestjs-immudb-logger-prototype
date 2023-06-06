@@ -1,0 +1,1 @@
+FROM codenotary/immudb:latest
