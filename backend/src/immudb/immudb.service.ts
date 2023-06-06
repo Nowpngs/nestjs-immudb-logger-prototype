@@ -25,7 +25,7 @@ interface Entry {
 }
 
 @Injectable()
-export class ImmudbService implements OnModuleDestroy {
+export class ImmudbService {
   private client: ImmudbClient;
 
   constructor() {
@@ -38,7 +38,7 @@ export class ImmudbService implements OnModuleDestroy {
         host: 'localhost',
         port: 3322,
       });
-      client.login({
+      await client.login({
         user: 'immudb',
         password: 'immudb',
       });
@@ -63,9 +63,5 @@ export class ImmudbService implements OnModuleDestroy {
     };
     const logs = await this.client.history(historyReq);
     return logs;
-  }
-
-  async onModuleDestroy() {
-    await this.client.logout();
   }
 }
