@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleDestroy } from '@nestjs/common';
 import ImmudbClient from 'immudb-node';
 
 @Injectable()
-export class ImmudbService {
+export class ImmudbService implements OnModuleDestroy {
   private client: ImmudbClient;
 
   constructor() {
@@ -24,5 +24,9 @@ export class ImmudbService {
   async getLogs(key: string): Promise<any> {
     const logs = await this.client.get({ key: key });
     return logs;
+  }
+
+  async onModuleDestroy() {
+    await this.client.logout();
   }
 }
