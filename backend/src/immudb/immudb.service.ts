@@ -14,6 +14,16 @@ interface SetRequest {
   value: string;
 }
 
+export interface HistoryResponse {
+  entriesList: Entry[];
+}
+
+interface Entry {
+  tx: number;
+  key: string;
+  value: string;
+}
+
 @Injectable()
 export class ImmudbService implements OnModuleDestroy {
   private client: ImmudbClient;
@@ -46,7 +56,7 @@ export class ImmudbService implements OnModuleDestroy {
     await this.client.set(logReq);
   }
 
-  async getLogs(key: string): Promise<any> {
+  async getLogs(key: string): Promise<HistoryResponse> {
     const historyReq: HistoryRequest = {
       key: key,
       desc: true,
