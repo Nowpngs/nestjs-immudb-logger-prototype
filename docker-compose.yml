@@ -5,6 +5,3 @@ services:
     ports:
       - "3322:3322"
       - "9497:9497"
-    environment:
-      - IMMUDB_USER=myuser
-      - IMMUDB_PASS=mypassword
