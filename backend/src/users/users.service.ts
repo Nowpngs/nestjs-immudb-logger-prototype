@@ -5,7 +5,12 @@ import { ImmudbService } from 'src/immudb/immudb.service';
 export class UsersService {
   constructor(private loggerService: ImmudbService) {}
   async createUser() {
-    return 'This action adds a new user';
+    try {
+      await this.loggerService.logData('users', 'create user');
+      return 'This action add a new user';
+    } catch (error) {
+      return error;
+    }
   }
 
   async getAllUsers() {
