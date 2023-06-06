@@ -1,7 +1,14 @@
 version: "3.3"
 services:
   immudb:
-    build: .
+    image: codenotary/immudb:latest
     ports:
       - "3322:3322"
       - "9497:9497"
+    environment:
+      - USERNAME=immudb
+      - PASSWORD=immudb
+    volumes:
+      - immudb_data:/var/lib/immudb
+volumes:
+  immudb_data:

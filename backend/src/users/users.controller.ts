@@ -10,6 +10,9 @@ export class UsersController {
 
   @Post()
   async createUser(@Body() createUserDto: CreateUserDTO): Promise<string> {
+    if (!createUserDto.name) {
+      return 'Please provide a name';
+    }
     return this.usersService.createUser(createUserDto);
   }
 
